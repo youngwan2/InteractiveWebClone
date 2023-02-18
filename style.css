@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+a {
+    list-style: none;
+    text-decoration: none;
+    color: black;
+}
+
+html{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 15px;
+}
+
+body{
+    overflow-x: hidden;
+    letter-spacing: -0.05em;
+    background-color: white;
+}
+
+.container{
+    width: 100%;
+}
+
+/* 최상단 메뉴 */
+.global_nav{
+    margin: 0 auto;
+    height: 44px;
+    max-width: 1200px;
+}
+
+.global_nav_links{
+    display: flex;
+    padding-top: 8px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 최상단 바로 아래 메뉴(제목/소카테고리) */
+.local_nav{
+    max-width: 1200px;
+    border-bottom: 1px solid gray;
+    margin: 0 auto;
+}
+
+.local_nav_links{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.local_nav_links .local_nav_item_right a{
+    padding: 0 10px 0 10px;
+}
+
+
+
+/* 임시 보덜 */
+section{
+    border: 1px dashed red;
+}
+
+section:nth-of-type(2n){
+    background-color: rgb(159, 154, 154);
+}
