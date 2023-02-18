@@ -58,9 +58,9 @@ body {
 .local_nav_links .local_nav_item_right a {
   padding: 0 0px 0 5px;
 }
-
+/* -------------------------------- */
 /* ----------섹션 영역 ---------*/
-/* ---섹션 컨테이너(섹션 전체 영역 공통) */
+/* ---섹션 컨테이너(섹션 전체 영역 공통)-------- */
 .scroll_section {
   padding-top: 50vh;
 }
@@ -68,18 +68,36 @@ body {
 /*main_message(섹션0,1 공통: 박스 영역 높이 설정 및 p 태그 중앙 정렬 */
 .main_message {
   border: 1px dashed blue;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: blanchedalmond;
 }
 
 .main_message p {
   font-weight: bold;
   line-height: 1.2;
   font-size: 1.25rem;
+}
+
+/* ---------각각 보여줄 영역을 표현함 */
+/* body의 id에 show_section_@을 각 영역별로 체인지해서
+ 해당 하는 영역의 sticky 효과가 적용된 요소를 보여준다. */
+
+/* 섹션0,2 에 sticky 적용할 요소 있음 */
+.sticky_elem {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#show_section_0 #scroll_section_0 .sticky_elem,
+#show_section_1 #scroll_section_1 .sticky_elem,
+#show_section_2 #scroll_section_2 .sticky_elem,
+#show_section_3 #scroll_section_3 .sticky_elem {
+  display: block;
 }
 
 /* -----------섹션 0 영역-- */
@@ -207,9 +225,8 @@ section:nth-of-type(2n) {
     font-size: 4vw; /* 창크기의 4퍼센트 크기*/
   }
 
-  .canvas_caption{
+  .canvas_caption {
     font-size: 2rem; /* html 태그의 폰트 사이즈 14px * 2 = 28px */
-
   }
 }
 
