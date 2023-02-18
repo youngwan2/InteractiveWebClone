@@ -1,68 +1,219 @@
-*{
-    margin: 0;
-    box-sizing: border-box;
-    padding: 0;
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
 }
 
 a {
-    list-style: none;
-    text-decoration: none;
-    color: black;
+  list-style: none;
+  text-decoration: none;
+  color: black;
 }
 
-html{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 15px;
+html {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 15px;
 }
 
-body{
-    overflow-x: hidden;
-    letter-spacing: -0.05em;
-    background-color: white;
+body {
+  overflow-x: hidden;
+  letter-spacing: -0.05em;
+  background-color: white;
 }
 
-.container{
-    width: 100%;
+.container {
+  width: 100%;
 }
 
-/* 최상단 메뉴 */
-.global_nav{
-    margin: 0 auto;
-    height: 44px;
-    max-width: 1200px;
+/* 최상단 메뉴(카테고리 4개 있는 부분) */
+.global_nav {
+  padding: 0 1rem 0 1rem;
+  margin: 0 auto;
+  height: 44px;
+  max-width: 1200px;
 }
 
-.global_nav_links{
-    display: flex;
-    padding-top: 8px;
-    justify-content: space-between;
-    align-items: center;
+.global_nav_links {
+  display: flex;
+  padding-top: 8px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* 최상단 바로 아래 메뉴(제목/소카테고리) */
-.local_nav{
-    max-width: 1200px;
-    border-bottom: 1px solid gray;
-    margin: 0 auto;
+.local_nav {
+  padding: 0 1rem 0 1rem;
+  max-width: 1200px;
+  border-bottom: 1px solid gray;
+  margin: 0 auto;
 }
 
-.local_nav_links{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.local_nav_links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.local_nav_links .local_nav_item_right a{
-    padding: 0 10px 0 10px;
+.local_nav_links .local_nav_item_right a {
+  padding: 0 0px 0 5px;
 }
 
-
-
-/* 임시 보덜 */
-section{
-    border: 1px dashed red;
+/* ----------섹션 영역 ---------*/
+/* ---섹션 컨테이너(섹션 전체 영역 공통) */
+.scroll_section {
+  padding-top: 50vh;
 }
 
-section:nth-of-type(2n){
-    background-color: rgb(159, 154, 154);
+/*main_message(섹션0,1 공통: 박스 영역 높이 설정 및 p 태그 중앙 정렬 */
+.main_message {
+  border: 1px dashed blue;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: blanchedalmond;
+}
+
+.main_message p {
+  font-weight: bold;
+  line-height: 1.2;
+  font-size: 1.25rem;
+}
+
+/* -----------섹션 0 영역-- */
+#section_0_title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* ----------섹션 1 영역 */
+
+.description {
+  color: #888;
+  text-align: justify;
+  padding: 0 1rem;
+  margin: 0 auto;
+
+  max-width: 1200px;
+}
+.description .section_1_title {
+  font-size: 2.3rem;
+  color: rgb(71, 69, 69);
+  float: left;
+  margin-right: 1em;
+}
+
+/* ========섹션 2 영역 */
+
+/* 상세설명 0 영역 */
+.main_message small {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 0.5em;
+}
+
+#scroll_section_2 .main_message {
+  font-size: 3.5rem;
+}
+
+/* 상세설명1,2 공통 부분 */
+.desc_message {
+  width: 50%;
+  font-weight: bold;
+}
+
+.pin {
+  width: 1px;
+  height: 100px;
+  background-color: gray;
+}
+
+/* ============섹션 3 영역 */
+/* 중간 메시지  */
+.mid_message {
+  padding: 1em; /* 28px(2rem)ㄱ * 1 = 28px */
+  font-size: 2rem; /* 14 * 2 = 28px */
+  color: #888;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 중간 메시지의 타이틀 */
+.mid_message strong {
+  color: #000;
+}
+
+/* 캔버스 캡션 영역 */
+.canvas_caption {
+  color: #888;
+  padding: 1.8em;
+  font-size: 1.2rem;
+  text-align: justify;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===========footer */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7rem;
+  background-color: teal;
+}
+
+section:nth-of-type(2n) {
+  background-color: rgb(255, 255, 255);
+}
+
+/* 브라우저 사이즈가 1024 px 이상이면 적용함. */
+@media screen and (min-width: 1024px) {
+  /* 섹션 0 영역 */
+  #scroll_section_0 #section_0_title {
+    font-size: 8vw;
+  }
+
+  .main_message p {
+    font-size: 3.5vw;
+  }
+
+  /* 섹션 1 영역 - 보통 스크롤 영역 */
+  .description {
+    font-size: 2rem;
+  }
+
+  .description .section_1_title {
+    font-size: 6rem;
+  }
+
+  /* 섹션 2 영역 */
+  #scroll_section_2 .main_message {
+    font-size: 6vw; /* 창 사이즈에 따라 크기 조절이 되도록*/
+  }
+
+  .main_message small {
+    font-size: 1.5vw;
+  }
+
+  /* 섹션 2의 상세 설명1,2 영역 */
+  .desc_message {
+    width: 20%;
+  }
+
+  /* 섹션 3 중간 메시지 영역 */
+  .mid_message {
+    font-size: 4vw; /* 창크기의 4퍼센트 크기*/
+  }
+
+  .canvas_caption{
+    font-size: 2rem; /* html 태그의 폰트 사이즈 14px * 2 = 28px */
+
+  }
+}
+
+/* ========================임시 보덜 */
+section {
+  border: 1px dashed red;
 }
