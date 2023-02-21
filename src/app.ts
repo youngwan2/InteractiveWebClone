@@ -24,10 +24,10 @@
       //메시지 영역 애니메이션 설정값(투명도)[시작,끝]
       // 섹션 내 스크롤 위치에 따른 투명도 조절 때 사용
       values: {
-        messageA_opacity: [0, 1],
-        messageB_opacity: [0, 1],
-        messageC_opacity: [0, 1],
-        messageD_opacity: [0, 1],
+        //애니메이션이 시작되고 종료되는 시점
+        //-----------------0--1--------------2
+        messageA_opacity: [0, 1, { start: 0.1, end: 0.2 }],
+        messageB_opacity: [0, 1, { start: 0.3, end: 0.4 }],
       },
     },
     // ----------섹션 1
@@ -95,15 +95,44 @@
   };
   // 이 함수를 이용해서 투명도 0~1 사이를 조절하는 애니메이션 계산에 활용
   //-----------------투명도값, 각 섹션에서 스크롤 위치
-  const calcValues = (values: number[], currentScrollY: number) => {
+  const calcValues = (values_A: any[], currentScrollY: number) => {
     let view: number;
-    //현재 섹션에서 스크롤 비율0~1 사이 = 해당 섹션에서 현재 스크롤 높이 / 해당 섹션의 전체 스크롤 높이
-    let currentScrollRatio =
-      currentScrollY / sectionArea[activeSectionIndex].scrollHeight;
+    // 현재 섹션의 스크롤 높이
+    const currentScrollHeight = sectionArea[activeSectionIndex].scrollHeight;
+    //현재 섹션에서 스크롤 비율0 ~ 1 사이 = 해당 섹션에서 현재 스크롤 높이 / 해당 섹션의 전체 스크롤 높이
+    const currentScrollRatio = currentScrollY / currentScrollHeight;
 
-    view = currentScrollRatio * (values[1] - values[0]) + values[0];
-    console.log(view);
-    return view;
+    if (values_A.length === 3) {
+      // start ~ end 사이 애니메이션 실행
+      // 부분 요소의 애니메이션 시작점과 끝점을 알았으니
+      // 그 부분 요소의 시작점~ 끝점 사이의 스크롤 비율을 구해야 한다.
+      const partScrollStart = values_A[2].start * currentScrollHeight;
+      const partScrollEnd = values_A[2].end * currentScrollHeight;
+      const partScrollHeight = partScrollEnd - partScrollStart; //요소 전체 높이
+
+      if (
+        // 부분요소의 총 높이보다 크면서, 부분요소의 끝지점 보다
+        // 현재 스크롤 높이가 작아질 떄 까지 실행한다.
+        currentScrollY >= partScrollHeight &&
+        currentScrollY <= partScrollEnd
+      ) {
+        return view =
+          // (현재 섹션 스크롤 높이 - 특정 요소의 스크롤 시작점)/ 특정 요소의 전체 스크롤 높이
+          ((currentScrollY - partScrollStart) / partScrollHeight) *
+            (values_A[1] - values_A[0]) +
+          values_A[0];
+
+        // 현재 스크롤 높이가 부분 요소의 시작점보다 작다면
+      } else if (currentScrollY < partScrollStart) {
+       return  view = values_A[0];
+
+        // 현재 스크롤 높이가 부분 요소의 끝 지점을 벗어난다면
+      } else if (currentScrollY > partScrollEnd) {
+        return view = values_A[1];
+      }
+    } else {
+      return view = currentScrollRatio * (values_A[1] - values_A[0]) + values_A[0];
+    }
   };
 
   // 애니메이션 실행 관련 부분 처리하는 함수

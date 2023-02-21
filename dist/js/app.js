@@ -17,10 +17,8 @@
                 messageD: document.querySelector(".section_0d"),
             },
             values: {
-                messageA_opacity: [0, 1],
-                messageB_opacity: [0, 1],
-                messageC_opacity: [0, 1],
-                messageD_opacity: [0, 1],
+                messageA_opacity: [0, 1, { start: 0.1, end: 0.2 }],
+                messageB_opacity: [0, 1, { start: 0.3, end: 0.4 }],
             },
         },
         {
@@ -66,12 +64,31 @@
         console.log(totalScrollHeight);
         document.body.setAttribute("id", `show_section_${activeSectionIndex}`);
     };
-    const calcValues = (values, currentScrollY) => {
+    const calcValues = (values_A, currentScrollY) => {
         let view;
-        let currentScrollRatio = currentScrollY / sectionArea[activeSectionIndex].scrollHeight;
-        view = currentScrollRatio * (values[1] - values[0]) + values[0];
-        console.log(view);
-        return view;
+        const currentScrollHeight = sectionArea[activeSectionIndex].scrollHeight;
+        const currentScrollRatio = currentScrollY / currentScrollHeight;
+        if (values_A.length === 3) {
+            const partScrollStart = values_A[2].start * currentScrollHeight;
+            const partScrollEnd = values_A[2].end * currentScrollHeight;
+            const partScrollHeight = partScrollEnd - partScrollStart;
+            if (currentScrollY >= partScrollHeight &&
+                currentScrollY <= partScrollEnd) {
+                return view =
+                    ((currentScrollY - partScrollStart) / partScrollHeight) *
+                        (values_A[1] - values_A[0]) +
+                        values_A[0];
+            }
+            else if (currentScrollY < partScrollStart) {
+                return view = values_A[0];
+            }
+            else if (currentScrollY > partScrollEnd) {
+                return view = values_A[1];
+            }
+        }
+        else {
+            return view = currentScrollRatio * (values_A[1] - values_A[0]) + values_A[0];
+        }
     };
     const playAnimation = () => {
         const HTMLobjects = sectionArea[activeSectionIndex].HTMLobjects;
